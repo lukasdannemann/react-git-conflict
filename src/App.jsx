@@ -2,12 +2,25 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
-  const [users, setUsers] = useState([]);
+  const userArray = [
+    "NullPointerNinja",
+    "AsyncAvenger",
+    "ByteShiftBear",
+    "StackTraceSamurai",
+    "LambdaLurker",
+    "GitPushGuru",
+    "SyntaxSparrow",
+    "DebugDruid",
+    "CryptoCamel",
+    "RefactorRaven",
+  ];
+
+  const [users, setUsers] = useState(userArray);
   const [username, setUsername] = useState("");
 
   const addUser = () => {
     setUsers([...users, username]);
-    setUsername('')
+    setUsername("");
   };
 
   const removeUser = (user) => {
@@ -29,12 +42,12 @@ function App() {
       return 0;
     });
 
-    setUsers(sortedUserList)
+    setUsers(sortedUserList);
   };
 
   return (
     <>
-      <h1>Användarlista</h1>
+      <h1>Username app</h1>
       <input
         type="text"
         placeholder="Användarnamn"
@@ -42,14 +55,15 @@ function App() {
         onChange={(e) => setUsername(e.target.value)}
       />
       <button onClick={addUser}>Lägg till</button>
-      <br />
+      <br /> <br />
+      <h2>Användarlista</h2>
       <button onClick={() => sortUsers()}>Sortera A-Ö</button>
       <ul>
         {users.map((user) => (
-            <li>
-              {user}
-              <button onClick={() => removeUser(user)}>Ta bort</button>
-            </li>
+          <li>
+            {user}
+            <button onClick={() => removeUser(user)}>Ta bort</button>
+          </li>
         ))}
       </ul>
     </>
