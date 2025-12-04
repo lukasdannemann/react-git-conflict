@@ -19,10 +19,6 @@ function App() {
       setTitle('')
     }
 
-    const deleteButton = () => {
-      
-    }
-
   return (
     <>
       <h1>Projekt</h1>
