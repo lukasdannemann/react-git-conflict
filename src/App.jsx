@@ -1,13 +1,59 @@
-import { useState } from 'react'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
 
 function App() {
+  const [users, setUsers] = useState([]);
+  const [username, setUsername] = useState("");
+
+  const addUser = () => {
+    setUsers([...users, username]);
+    setUsername('')
+  };
+
+  const removeUser = (user) => {
+    let newUserList = users.filter((u) => u !== user);
+    setUsers(newUserList);
+  };
+
+  const sortUsers = () => {
+    let sortedUserList = [...users].sort((a, b) => {
+      const userA = a.toUpperCase();
+      const userB = b.toUpperCase();
+      if (userA < userB) {
+        return -1;
+      }
+      if (userA > userB) {
+        return 1;
+      }
+
+      return 0;
+    });
+
+    setUsers(sortedUserList)
+  };
 
   return (
     <>
-    <h1>Projekt</h1>
+      <h1>Användarlista</h1>
+      <input
+        type="text"
+        placeholder="Användarnamn"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <button onClick={addUser}>Lägg till</button>
+      <br />
+      <button onClick={() => sortUsers()}>Sortera A-Ö</button>
+      <ul>
+        {users.map((user) => (
+            <li>
+              {user}
+              <button onClick={() => removeUser(user)}>Ta bort</button>
+            </li>
+        ))}
+      </ul>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
